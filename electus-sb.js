@@ -23,6 +23,9 @@
     let el = document.getElementById('__sb_dbg_badge__');
     if (el) return el;
 
+    // body kann in sehr frühen Phasen noch null sein
+    if (!document.body) return null;
+
     el = document.createElement('div');
     el.id = '__sb_dbg_badge__';
     el.style.position = 'fixed';
@@ -41,15 +44,18 @@
     return el;
   }
 
+
   function renderBadge() {
     const el = ensureBadge();
+    if (!el) return;
     el.textContent =
-      `SB DEBUG\n` +
-      `submit events: ${state.submitEvents}\n` +
-      `form.submit(): ${state.nativeSubmitCalls}\n` +
-      `fetch(): ${state.fetchCalls}\n` +
-      `${state.last ? 'last: ' + state.last : ''}`;
+        `SB DEBUG\n` +
+        `submit events: ${state.submitEvents}\n` +
+        `form.submit(): ${state.nativeSubmitCalls}\n` +
+        `fetch(): ${state.fetchCalls}\n` +
+        `${state.last ? 'last: ' + state.last : ''}`;
   }
+
 
   function shortFormInfo(form) {
     if (!form) return { found: false };
