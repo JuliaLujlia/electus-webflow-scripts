@@ -25,6 +25,7 @@
 
   function log(...args) {
     console.log("[SB SANDBOX]", ...args);
+    console.trace("[SB SANDBOX TRACE]");
   }
 
   // 1) Patch native form.submit()
